@@ -19,7 +19,7 @@ public class Calendar {
 	}
 
 	public static void main(String[] args) {
-		
+
 		String prompt = "> ";
 		Scanner scanner = new Scanner(System.in);
 		Calendar cal = new Calendar();
@@ -28,7 +28,9 @@ public class Calendar {
 			System.out.println("월을 입력하세요.");
 			System.out.print(prompt);
 			month = scanner.nextInt();
-			if(month == -1) {break;}
+			if (month == -1) {
+				break;
+			}
 			System.out.printf("%d월은 %d일까지 있습니다.\n", month, cal.getMaxDaysOfMonth(month));
 		}
 		System.out.println("Bye");
