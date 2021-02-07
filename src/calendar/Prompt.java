@@ -1,5 +1,6 @@
 package calendar;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Prompt {
@@ -11,63 +12,70 @@ public class Prompt {
 		System.out.println("| h. 도움말 q. 종료");
 		System.out.println("+------------------------+");
 	}
+
 	private final static String PROMPT = "> ";
 
-	public void runPrompt() {
+	public void runPrompt() throws ParseException {
 		printMenu();
 		Scanner scanner = new Scanner(System.in);
 
-
-		
 		while (true) {
 			System.out.println("명령 (1, 2, 3, h, q)");
 			String cmd = scanner.next();
 			Calendar cal = new Calendar();
-			if(cmd.equals("1") ) {
-				cmdRegister();
-				System.out.println("[일정 등록] 날짜를 입력하세요.");
-			} else if(cmd.equals("2")) {
-				cmdSearch();
-			} else if(cmd.equals("3")) {
+			if (cmd.equals("1")) {
+				cmdRegister(scanner, cal);
+			} else if (cmd.equals("2")) {
+				cmdSearch(scanner, cal);
+			} else if (cmd.equals("3")) {
 				cmdCal(scanner, cal);
-			} else if(cmd.equals("h")) {
+			} else if (cmd.equals("h")) {
 				printMenu();
-			} else if(cmd.equals("q")) {
+			} else if (cmd.equals("q")) {
 				break;
 			}
-			
+
 		}
 		System.out.println("Bye");
 		scanner.close();
 	}
 
-	private void cmdCal(Scanner scanner, Calendar cal) {
+	public void cmdCal(Scanner scanner, Calendar cal) {
 
 		int month = 1;
 		int year = 2021;
-		
+
 		System.out.println("년도를 입력하세요.");
 		System.out.print(PROMPT);
 		year = scanner.nextInt();
 		System.out.println("월을 입력하세요.");
 		System.out.print(PROMPT);
 		month = scanner.nextInt();
-		
+
 		cal.printCalendar(year, month);
 
 	}
 
-	private void cmdSearch() {
-		// TODO Auto-generated method stub
-		
+	public void cmdSearch(Scanner scanner, Calendar cal) throws ParseException {
+		System.out.println("[일정 검색]");
+		System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd).");
+		String date = scanner.next();
+		String plan=cal.searchPlan(date);
+		System.out.println(plan);
+
 	}
 
-	private void cmdRegister() {
-		// TODO Auto-generated method stub
-		
+	public void cmdRegister(Scanner scanner, Calendar cal) throws ParseException {
+		System.out.println("[새 일정 등록]");
+		System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd).");
+		String date = scanner.next();
+		scanner.nextLine();
+		System.out.println("일정을 입력해 주세요.");
+		String text = scanner.nextLine();
+		cal.registerPlan(date, text);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		// 셀 실행
 		Prompt p = new Prompt();
 		p.runPrompt();
