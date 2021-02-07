@@ -19,16 +19,39 @@ public class Calendar {
 			return MAX_DAYS[month - 1];
 		}
 	}
+	
+	public int getWeekDay(int year, int month) {
+		int sumDay=0;
+		for(int i=1; i<year; i++) {
+			if(isLeapYear(i)) {
+				sumDay += 366;
+			} else {
+				sumDay += 365;
+			}
+		}
+		for(int i=0; i<month-1; i++) {
+			if(isLeapYear(year)) {
+				sumDay += LEAP_MAX_DAYS[i];
+			} else {
+				sumDay += MAX_DAYS[i];
+			}
+		}
+		return sumDay%7;
+	}
 
-	public void printCalendar(int year, int month, int weekday) {
-		System.out.printf("    <<%4d년%3d월>>\n", year, month);
+	public void printCalendar(int year, int month) {
+		System.out.printf("    <<%d년 %d월>>\n", year, month);
 		System.out.println(" SU MO TU WE TH FR SA");
 		System.out.println("---------------------");
-
+		
+		
+		int weekday = (getWeekDay(year, month)+1)%7;
+		
+		//print blank space
 		for (int i = 0; i < weekday; i++) {
 			System.out.print("   ");
 		}
-
+		//print days
 		int maxday = getMaxDaysOfMonth(year, month);
 		for (int i = 1; i <= maxday; i++) {
 			System.out.printf("%3d", i);
