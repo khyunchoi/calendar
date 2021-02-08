@@ -18,11 +18,12 @@ public class Prompt {
 	public void runPrompt() throws ParseException {
 		printMenu();
 		Scanner scanner = new Scanner(System.in);
+		Calendar cal = new Calendar();
 
 		while (true) {
 			System.out.println("명령 (1, 2, 3, h, q)");
 			String cmd = scanner.next();
-			Calendar cal = new Calendar();
+
 			if (cmd.equals("1")) {
 				cmdRegister(scanner, cal);
 			} else if (cmd.equals("2")) {
@@ -60,7 +61,7 @@ public class Prompt {
 		System.out.println("[일정 검색]");
 		System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd).");
 		String date = scanner.next();
-		String plan=cal.searchPlan(date);
+		String plan = cal.searchPlan(date);
 		System.out.println(plan);
 
 	}

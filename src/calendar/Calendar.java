@@ -9,7 +9,7 @@ public class Calendar {
 	private final static int[] MAX_DAYS = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	private final static int[] LEAP_MAX_DAYS = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-	private HashMap<Date, String> planMap;
+	public HashMap<Date, String> planMap;
 	
 	public Calendar() {
 		planMap = new HashMap<Date, String>();
