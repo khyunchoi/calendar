@@ -19,20 +19,26 @@ public class Prompt {
 		printMenu();
 		Scanner scanner = new Scanner(System.in);
 		Calendar cal = new Calendar();
-
-		while (true) {
+		boolean isTrue = true;
+		while (isTrue) {
 			System.out.println("명령 (1, 2, 3, h, q)");
 			String cmd = scanner.next();
 
-			if (cmd.equals("1")) {
+			switch (cmd) {
+			case "1":
 				cmdRegister(scanner, cal);
-			} else if (cmd.equals("2")) {
+				break;
+			case "2":
 				cmdSearch(scanner, cal);
-			} else if (cmd.equals("3")) {
+				break;
+			case "3":
 				cmdCal(scanner, cal);
-			} else if (cmd.equals("h")) {
+				break;
+			case "h":
 				printMenu();
-			} else if (cmd.equals("q")) {
+				break;
+			case "q":
+				isTrue = false;
 				break;
 			}
 
@@ -61,8 +67,12 @@ public class Prompt {
 		System.out.println("[일정 검색]");
 		System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd).");
 		String date = scanner.next();
-		String plan = cal.searchPlan(date);
-		System.out.println(plan);
+		PlanItem plan = cal.searchPlan(date);
+		if (plan != null) {
+			System.out.println(plan.detail);
+		} else {
+			System.out.println("일정이 없습니다.");
+		}
 
 	}
 
